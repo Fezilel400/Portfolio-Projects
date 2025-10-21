@@ -64,7 +64,7 @@ SELECT dea.CONTINENT, dea.LOCATION, dea.DATE, dea.POPULATION, vac.NEW_VACCINATIO
 SUM(CONVERT(INT,vac.NEW_VACCINATIONS)) OVER (PARTITION BY dea.LOCATION ORDER BY dea.LOCATION, dea.DATE) AS RollingPeopleVaccinated
 -- ,(RollingPeopleVaccinated/population)*100
 FROM PortfoiloProject..COVIDDEATHS dea
-join FROM PortfoiloProject..COVIDVACCINATIONS vac
+join PortfoiloProject..COVIDVACCINATIONS vac
 ON dea.LOCATION = vac.LOCATION
 AND dea.DATE = vac.DATE
 WHERE dea.CONTINENT IS NOT NULL 
@@ -79,7 +79,7 @@ SELECT dea.CONTINENT, dea.LOCATION, dea.DATE, dea.POPULATION, vac.NEW_VACCINATIO
 SUM(CONVERT(INT,vac.NEW_VACCINATIONS)) OVER (PARTITION BY dea.LOCATION ORDER BY dea.LOCATION, dea.DATE) AS RollingPeopleVaccinated
 -- ,(RollingPeopleVaccinated/population)*100
 FROM PortfoiloProject..COVIDDEATHS dea
-join FROM PortfoiloProject..COVIDVACCINATIONS vac
+join PortfoiloProject..COVIDVACCINATIONS vac
 ON dea.LOCATION = vac.LOCATION
 AND dea.DATE = vac.DATE
 WHERE dea.CONTINENT IS NOT NULL 
@@ -105,7 +105,7 @@ INSERT INTO #PercentPopulationVaccinated
 SELECT dea.CONTINENT, dea.LOCATION, dea.DATE, dea.POPULATION, vac.NEW_VACCINATIONS,
 SUM(CONVERT(INT,vac.NEW_VACCINATIONS)) OVER (PARTITION BY dea.LOCATION ORDER BY dea.LOCATION, dea.DATE) AS RollingPeopleVaccinated
 FROM PortfoiloProject..COVIDDEATHS dea
-join FROM PortfoiloProject..COVIDVACCINATIONS vac
+join PortfoiloProject..COVIDVACCINATIONS vac
 ON dea.LOCATION = vac.LOCATION
 AND dea.DATE = vac.DATE
 
@@ -118,10 +118,11 @@ CREATE VIEW PercentPopulationVaccinated AS
 SELECT dea.CONTINENT, dea.LOCATION, dea.DATE, dea.POPULATION, vac.NEW_VACCINATIONS,
 SUM(CONVERT(INT,vac.NEW_VACCINATIONS)) OVER (PARTITION BY dea.LOCATION ORDER BY dea.LOCATION, dea.DATE) AS RollingPeopleVaccinated
 FROM PortfoiloProject..COVIDDEATHS dea
-join FROM PortfoiloProject..COVIDVACCINATIONS vac
+join PortfoiloProject..COVIDVACCINATIONS vac
 ON dea.LOCATION = vac.LOCATION
 AND dea.DATE = vac.DATE
 WHERE dea.CONTINENT IS NOT NULL 
 
 SELECT *
+
 FROM PercentPopulationVaccinated
